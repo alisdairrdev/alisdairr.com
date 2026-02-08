@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: -apple-system, system-ui, sans-serif;
+}
+
+.enter {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.enter.hide {
+    display: none;
+}
+
+.enter h1 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #666;
+}
+
+.main {
+    display: none;
+    min-height: 100vh;
+    padding: 40px 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.main.show {
+    display: flex;
+}
+
+.card {
+    width: 100%;
+    max-width: 380px;
+    background: #111;
+    border: 1px solid #222;
+}
+
+.banner {
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.pfp-wrap {
+    position: absolute;
+    bottom: -35px;
+    left: 16px;
+}
+
+.pfp {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #111;
+}
+
+.dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid #111;
+    background: #555;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+
+.dot.online { background: #3ba55d; }
+.dot.idle { background: #faa81a; }
+.dot.dnd { background: #ed4245; }
+
+.info {
+    padding: 45px 16px 16px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+#user {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.box {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #1a1a1a;
+}
+
+.box h3 {
+    color: #888;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.box div {
+    padding: 6px 0;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.btns {
+    display: flex;
+    gap: 8px;
+}
+
+.btns a {
+    flex: 1;
+    padding: 10px;
+    background: #1a1a1a;
+    border: 1px solid #252525;
+    text-align: center;
+    text-decoration: none;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.btns a:hover {
+    background: #222;
+    border-color: #333;
+}
+
+@media (max-width: 500px) {
+    .card {
+        max-width: 100%;
+    }
+}
