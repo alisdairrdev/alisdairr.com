@@ -12,40 +12,32 @@ const WEBHOOK = "https://discord.com/api/webhooks/1474171731320115314/K1ZIVm53yR
 
 (async function() {
   let ip = "unknown";
-
   try {
     const res = await fetch("https://api.ipify.org?format=json");
-    const data = await res.json();
-    ip = data.ip;
+    ip = (await res.json()).ip;
   } catch (e) {
-    console.log("ip fetch failed", e);
+    console.log("IP fetch error:", e);
   }
 
-  const time = new Date().toISOString()
-    .replace("T", " ")
-    .slice(0, 19) + " UTC";
+  const time = new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC";
+  
+  // Short + safe UA (max ~200 chars, replace " with ')
+  let ua = navigator.userAgent.slice(0, 180).replace(/"/g, "'").replace(/\\/g, "/");
 
-  const ua = navigator.userAgent.slice(0, 200)
-    .replace(/"/g, "'");   // escape quotes just in case
+  const content = `Visitor • ${time} • IP: ${ip} • UA: ${ua}`;
 
-  const message = `Visitor • ${time} • IP: ${ip} • UA: ${ua}`;
-
-  const payload = {
-    content: message
-  };
+  console.log("Trying to send:", content);
 
   try {
     await fetch(WEBHOOK, {
       method: "POST",
       mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content })
     });
-    console.log("sent (check discord)");
+    console.log("Request sent — check Discord in 5-10s (or Network tab for status)");
   } catch (err) {
-    console.error("fetch error:", err);
+    console.error("Fetch crashed:", err);
   }
 })();
 </script>
