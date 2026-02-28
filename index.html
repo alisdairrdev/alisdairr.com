@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alisdairr</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="enter" id="enter">
+        <h1>click anywhere</h1>
+    </div>
 
-<script>
-const WEBHOOK = "https://discord.com/api/webhooks/1474176275106238617/IONq73TswuNCjUq3OQX1s7FlKtnNA79ZRtQeG_8sPLvTkJLL8Ym16vw2YEQOoXKriXTp";
+    <div class="main" id="main">
+        <div class="card">
+            <div class="banner" style="background-image: url('https://cdn.discordapp.com/banners/262158823433830402/a6968acdded20432a93ef64479ca88c4.png?size=4096')">
+                <div class="pfp-wrap">
+                    <img class="pfp" id="pfp" src="https://cdn.discordapp.com/avatars/262158823433830402/cba7290c8e23713d06150f1589b4c404.png?size=512">
+                    <div class="dot" id="dot"></div>
+                </div>
+            </div>
 
-(async () => {
-  let ip = "unknown";
+            <div class="info">
+                <div id="load">loading...</div>
+                
+                <div id="data" style="display: none;">
+                    <h2 id="name"></h2>
+                    <p id="user"></p>
 
-  try {
-    const res = await fetch("https://api.ipify.org?format=json");
-    const data = await res.json();
-    ip = data.ip;
-  } catch (err) {
-    // fallback if ipify is down/blocked
-    try {
-      const res2 = await fetch("https://api64.ipify.org?format=json");
-      const data2 = await res2.json();
-      ip = data2.ip;
-    } catch {}
-  }
+                    <div class="box">
+                        <h3>stuff i do</h3>
+                        <div>vr for meta quest</div>
+                        <div>making websites</div>
+                        <div>python sometimes</div>
+                    </div>
 
-  const now = new Date().toISOString().slice(0, 19).replace("T", " ");
+                    <div class="box">
+                        <h3>links</h3>
+                        <div class="btns">
+                            <a href="https://github.com/alisdairrdev">github</a>
+                            <a href="https://discord.gg/JzY46QPp62">discord</a>
+                            <a href="mailto:axioform@hotmail.com">email</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  const payload = {
-    embeds: [{
-      title: "New visitor",
-      color: 0xFF5555,
-      fields: [
-        { name: "Time",     value: now + " UTC", inline: true },
-        { name: "IP",       value: "`" + ip + "`", inline: true },
-        { name: "UA",       value: "```" + navigator.userAgent.slice(0, 300) + "```" },
-        { name: "Referrer", value: document.referrer || "direct", inline: false }
-      ],
-      timestamp: new Date().toISOString()
-    }]
-  };
-
-  fetch(WEBHOOK, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  }).catch(() => {});   // silent fail
-})();
-</script>
-
+    <audio id="audio" loop></audio>
+    <script src="script.js"></script>
 </body>
 </html>
