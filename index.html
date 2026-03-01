@@ -1,53 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alisdairr</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>alisdairr</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
-    <div class="enter" id="enter">
-        <h1>click anywhere</h1>
-    </div>
+  <div id="cursor"></div>
 
-    <div class="main" id="main">
-        <div class="card">
-            <div class="banner" style="background-image: url('https://cdn.discordapp.com/banners/262158823433830402/a6968acdded20432a93ef64479ca88c4.png?size=4096')">
-                <div class="pfp-wrap">
-                    <img class="pfp" id="pfp" src="https://cdn.discordapp.com/avatars/751578620278866010/b5c95fdc99431368049280a9b319fe92.png?size=512">
-                    <div class="dot" id="dot"></div>
-                </div>
-            </div>
+  <!-- ENTER -->
+  <div id="enter">
+    <h1>alisdairr</h1>
+    <p>click anywhere</p>
+  </div>
 
-            <div class="info">
-                <div id="load">loading...</div>
-                
-                <div id="data" style="display: none;">
-                    <h2 id="name"></h2>
-                    <p id="user"></p>
-
-                    <div class="box">
-                        <h3>stuff i do</h3>
-                        <div>vr for meta quest</div>
-                        <div>making websites</div>
-                        <div>python sometimes</div>
-                    </div>
-
-                    <div class="box">
-                        <h3>links</h3>
-                        <div class="btns">
-                            <a href="https://github.com/alisdairrdev">github</a>
-                            <a href="https://discord.gg/JzY46QPp62">discord</a>
-                            <a href="mailto:axioform@hotmail.com">email</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="id">
+          <img
+            class="pfp"
+            id="pfp"
+            src="https://cdn.discordapp.com/avatars/751578620278866010/b5c95fdc99431368049280a9b319fe92.png?size=512"
+            alt=""
+          />
+          <div class="statusdot" id="dot"></div>
+          <div class="handle" id="handle">—</div>
         </div>
-    </div>
+        <div class="stamp">est. 2026</div>
+      </div>
 
-    <audio id="audio" loop></audio>
-    <script src="script.js"></script>
+      <div class="name" id="home-name">alisdair<em>r</em></div>
+
+      <div class="bio">
+        <p>
+          I'm a <em>14-year-old</em> aspiring game developer, born and raised in <em>Scotland</em>.
+          I build games and interactive experiences — and I’m always learning.
+        </p>
+      </div>
+
+      <div class="links">
+        <a class="linkbtn" href="https://github.com/alisdairrdev" target="_blank" rel="noreferrer">
+          <div class="link-left">
+            <div class="linktitle">github</div>
+            <div class="linkdesc">code &amp; projects</div>
+          </div>
+          <div class="arrow">↗</div>
+        </a>
+
+        <a class="linkbtn" href="https://buymeacoffee.com/alisdairdev" target="_blank" rel="noreferrer">
+          <div class="link-left">
+            <div class="linktitle">buymeacoffee</div>
+            <div class="linkdesc">support the work</div>
+          </div>
+          <div class="arrow">↗</div>
+        </a>
+
+        <a class="linkbtn" href="https://ko-fi.com/alisdairrdeveloper" target="_blank" rel="noreferrer">
+          <div class="link-left">
+            <div class="linktitle">ko-fi</div>
+            <div class="linkdesc">support the work</div>
+          </div>
+          <div class="arrow">↗</div>
+        </a>
+      </div>
+
+      <div class="footer">
+        <div class="foot-left">uk • scotland</div>
+        <div class="foot-right">
+          <a class="mini" href="https://github.com/alisdairrdev" target="_blank" rel="noreferrer">gh</a>
+          <a class="mini" href="https://buymeacoffee.com/alisdairdev" target="_blank" rel="noreferrer">bmac</a>
+          <a class="mini" href="https://ko-fi.com/alisdairrdeveloper" target="_blank" rel="noreferrer">kofi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio" loop></audio>
+
+  <script src="./script.js"></script>
 </body>
 </html>
