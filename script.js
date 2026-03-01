@@ -16,7 +16,7 @@ addBig("a, #enter, .linkbtn");
 
 // ── AUDIO + ENTER ──
 const audio = document.getElementById("audio");
-const songs = ["1.mp3", "2.mp3", "3.mp3"];
+const songs = ["1.mp3"];
 let songIdx = Math.floor(Math.random() * songs.length);
 
 // Visualiser bits
