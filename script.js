@@ -1,32 +1,53 @@
-var audio = document.getElementById('audio');
-var songs = ['1.mp3', '2.mp3', '3.mp3'];
-var idx = Math.floor(Math.random() * 3);
+// ── CURSOR ──
+const cur = document.getElementById("cursor");
 
-document.getElementById('enter').onclick = function() {
-    this.classList.add('hide');
-    document.getElementById('main').classList.add('show');
-    audio.src = songs[idx];
-    audio.volume = 0.3;
-    audio.play();
+document.addEventListener("mousemove", (e) => {
+  cur.style.left = e.clientX + "px";
+  cur.style.top  = e.clientY + "px";
+});
+
+function addBig(sel) {
+  document.querySelectorAll(sel).forEach((el) => {
+    el.addEventListener("mouseenter", () => cur.classList.add("big"));
+    el.addEventListener("mouseleave", () => cur.classList.remove("big"));
+  });
+}
+
+addBig("a, #enter, .linkbtn");
+
+// ── ENTER + AUDIO ──
+const audio = document.getElementById("audio");
+const songs = ["1.mp3", "2.mp3", "3.mp3"];
+let songIdx = Math.floor(Math.random() * songs.length);
+
+document.getElementById("enter").addEventListener("click", function () {
+  this.classList.add("hide");
+
+  audio.src = songs[songIdx];
+  audio.volume = 0.25;
+  audio.play().catch(() => {});
+});
+
+audio.onended = function () {
+  songIdx = (songIdx + 1) % songs.length;
+  audio.src = songs[songIdx];
+  audio.play().catch(() => {});
 };
 
-audio.onended = function() {
-    idx = (idx + 1) % 3;
-    audio.src = songs[idx];
-    audio.play();
-};
+// ── LANYARD ──
+fetch("https://api.lanyard.rest/v1/users/751578620278866010")
+  .then((r) => r.json())
+  .then((d) => {
+    if (!d.success) return;
 
-fetch('https://api.lanyard.rest/v1/users/751578620278866010')
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-        if (!d.success) return;
-        var p = d.data;
-        document.getElementById('load').style.display = 'none';
-        document.getElementById('data').style.display = 'block';
-        document.getElementById('dot').className = 'dot ' + (p.discord_status || 'offline');
-        document.getElementById('name').textContent = p.discord_user.global_name || p.discord_user.username;
-        document.getElementById('user').textContent = '@' + p.discord_user.username;
-    })
-    .catch(function() {
-        document.getElementById('load').textContent = 'failed';
-    });
+    const p = d.data;
+    const status = p.discord_status || "offline";
+    const uname = p.discord_user.global_name || p.discord_user.username;
+
+    document.getElementById("dot").className = "statusdot " + status;
+    document.getElementById("handle").textContent = p.discord_user.username;
+
+    // keep your stylized ending "r"
+    document.getElementById("home-name").innerHTML = uname.replace(/r$/, "<em>r</em>");
+  })
+  .catch(() => {});
