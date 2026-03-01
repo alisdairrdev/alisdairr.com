@@ -307,6 +307,20 @@ body::after{
 }
 .mini:hover{ color: rgba(245,200,0,.9); }
 
+/* ── visualiser ── */
+.viz{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+#viz{
+  width: 100%;
+  height: 54px;          /* visual height */
+  display: block;
+  border-radius: 10px;
+  background: rgba(255,255,255,.02);
+}
+
 @keyframes up{
   from{ opacity:0; transform: translateY(18px); }
   to{ opacity:1; transform: translateY(0); }
